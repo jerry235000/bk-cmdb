@@ -30,7 +30,8 @@ jobs:
         install: true
     - name: Build
       run: |
+        echo $PAT | docker login ghcr.io -u 153929962@qq.com --password-stdin
         cp ./src/bin/pub/cmdb.tar.gz ./cmdb.tar.gz
         tar -zxvf ./cmdb.tar.gz
         cd cmdb && ./image.sh -i centos:latest
-        echo $PAT | docker login ghcr.io -u 153929962@qq.com --password-stdin
+        
