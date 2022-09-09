@@ -19,6 +19,11 @@ jobs:
     - name: make package
       working-directory: ./src
       run: make package
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        name: cmdb.tar.gz
+        path: ./src/bin/pub/cmdb.tar.gz
     - uses: docker/setup-buildx-action@v2
       id: buildx
       with:
@@ -28,4 +33,4 @@ jobs:
         cp ./src/bin/pub/cmdb.tar.gz ./cmdb.tar.gz
         tar -zxvf ./cmdb.tar.gz
         cd cmdb && ./image.sh -i centos:latest
-        docker images
+        echo $PAT | docker login ghcr.io -u 153929962@qq.com --password-stdin
