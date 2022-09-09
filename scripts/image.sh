@@ -37,6 +37,7 @@ for tmp_file in $FILES;do
     echo "building image: ${tmp_file##*.}:${ver} ..."
     sed -e "s/image_placeholder/${image}/g" $tmp_file > "$(pwd)/Dockerfile"
     # build image
-    docker build -t "${tmp_file##*.}:${ver}" .
+    docker build -t "ghcr.io/tang95/${tmp_file##*.}:${ver}" .
+    docker push "ghcr.io/tang95/${tmp_file##*.}:${ver}"
     rm "$(pwd)/Dockerfile"
 done
